@@ -28,7 +28,7 @@ See [`vibe_coding_guide.md`](./vibe_coding_guide.md) for the full conversion gui
 
 ```
 I have a Claude Code agent at /path/to/my-agent (it has CLAUDE.md and .mcp.json).
-Convert it into the Talent Market template format following vibe_coding_guide.md.
+Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
 
 Steps:
 1. Create profile.yaml from CLAUDE.md (extract name, description, system prompt)
@@ -41,7 +41,7 @@ Steps:
 
 ```
 I have an OpenClaw agent at /path/to/openclaw-agent.
-Convert it into the Talent Market template format following vibe_coding_guide.md.
+Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
 
 Steps:
 1. Create profile.yaml (set agent_family: openclaw, hosting: self)
@@ -54,7 +54,7 @@ Steps:
 
 ```
 I have an agent at /path/to/agent.
-Convert it into the Talent Market template format following vibe_coding_guide.md.
+Convert it into the Talent Market template format (https://github.com/CarbonKite/talent-template) following vibe_coding_guide.md.
 
 Steps:
 1. Find the system prompt in the source code, create profile.yaml
