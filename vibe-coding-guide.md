@@ -4,18 +4,19 @@ This guide explains how to convert an AI agent definition (typically a markdown 
 
 ## Output Checklist (ALL items required)
 
-You MUST produce exactly **3 files** in the output directory. Do not skip any.
+You MUST produce exactly **4 files** in the output directory. Do not skip any.
 
 ```
 <talent-id>/
 ├── profile.yaml              ← REQUIRED (agent metadata)
+├── DESCRIPTION.md             ← REQUIRED (full agent description, displayed on detail page)
 ├── skills/
-│   └── core.md               ← REQUIRED (agent instructions — VERBATIM copy)
+│   └── core.md               ← REQUIRED (skill definition template)
 └── tools/
     └── manifest.yaml          ← REQUIRED (tool declarations template)
 ```
 
-**Verify before finishing:** All 3 files exist? `profile.yaml` has all required fields? `skills/core.md` is an exact copy of the source body?
+**Verify before finishing:** All 4 files exist? `profile.yaml` has all required fields? `DESCRIPTION.md` contains the full agent description?
 
 ---
 
@@ -27,16 +28,16 @@ You MUST produce exactly **3 files** in the output directory. Do not skip any.
 
 ---
 
-## Step 2: Create `skills/core.md` (DO THIS FIRST)
+## Step 2: Create `DESCRIPTION.md` (DO THIS FIRST)
 
-This is the most important file. It contains the agent's full instructions.
+This is the public-facing description displayed on the talent detail page. It contains the agent's full personality, instructions, and methodology.
 
 **Rule: VERBATIM COPY. Zero modifications.**
 
 1. Take the source markdown file
 2. Find the closing `---` of the YAML frontmatter
 3. Copy EVERYTHING after it — every character, every emoji, every heading, every code block
-4. Write it to `skills/core.md`
+4. Write it to `DESCRIPTION.md`
 
 **DO NOT:**
 - Remove or change emoji characters (e.g., keep `## 🧠 Your Identity` exactly as-is)
@@ -107,7 +108,29 @@ agent_family: ""
 
 ---
 
-## Step 4: Create `tools/manifest.yaml`
+## Step 4: Create `skills/core.md`
+
+This is a skill definition template. Use the following default content:
+
+```markdown
+# Core Skill
+
+This is the agent's primary skill. It defines the agent's main capability
+and working methodology.
+
+## Guidelines
+
+- Follow the instructions in the agent's system prompt
+- Apply domain expertise as described in the agent profile
+- Maintain the agent's defined personality and communication style
+- Deliver outputs that match the agent's role and specialization
+```
+
+> **Note:** `skills/core.md` is a template for the skill framework. The agent's full description and instructions live in `DESCRIPTION.md`. Do NOT copy the source agent body into `skills/core.md`.
+
+---
+
+## Step 5: Create `tools/manifest.yaml`
 
 Always use this exact content:
 
@@ -177,14 +200,15 @@ Choose 2-5 from this list, based on the agent's described working style and pers
 
 | # | Mistake | Correct Behavior |
 |---|---------|-----------------|
-| 1 | Modifying `skills/core.md` content (removing emojis, reformatting, summarizing) | Copy source body **exactly as-is**, including all emojis, formatting, code blocks |
-| 2 | Forgetting to create `skills/core.md` | This is the MOST IMPORTANT file. Create it FIRST |
-| 3 | Setting `hosting: company` | Must be `self` |
-| 4 | Setting `api_provider: openrouter` | Must be `anthropic` |
-| 5 | Using generic role like "Specialist" or "Engineer" | Use the most specific role from the Role Table |
-| 6 | Making `system_prompt_template` too long | Keep it to 1-2 sentences max |
-| 7 | Forgetting `tools/manifest.yaml` | Always create it, even though it's just a template |
-| 8 | Wrong `id` (doesn't match directory name / source filename) | Must match exactly |
+| 1 | Modifying `DESCRIPTION.md` content (removing emojis, reformatting, summarizing) | Copy source body **exactly as-is**, including all emojis, formatting, code blocks |
+| 2 | Forgetting to create `DESCRIPTION.md` | This is the MOST IMPORTANT file. Create it FIRST |
+| 3 | Copying source body into `skills/core.md` instead of `DESCRIPTION.md` | Source body → `DESCRIPTION.md`. `skills/core.md` uses the default template |
+| 4 | Setting `hosting: company` | Must be `self` |
+| 5 | Setting `api_provider: openrouter` | Must be `anthropic` |
+| 6 | Using generic role like "Specialist" or "Engineer" | Use the most specific role from the Role Table |
+| 7 | Making `system_prompt_template` too long | Keep it to 1-2 sentences max |
+| 8 | Forgetting `tools/manifest.yaml` | Always create it, even though it's just a template |
+| 9 | Wrong `id` (doesn't match directory name / source filename) | Must match exactly |
 
 ---
 
@@ -211,6 +235,19 @@ You are **SEO Specialist**, an expert in technical SEO...
 ```
 
 ### Output:
+
+**`marketing-seo-specialist/DESCRIPTION.md`:**
+```markdown
+# 🔍 SEO Specialist Agent
+
+You are **SEO Specialist**, an expert in technical SEO...
+
+## 🧠 Your Identity & Memory
+- **Role**: Search engine optimization expert
+...
+```
+
+Note: The emojis `🔍` and `🧠` in the headings are **preserved exactly** from the source.
 
 **`marketing-seo-specialist/profile.yaml`:**
 ```yaml
@@ -239,16 +276,18 @@ agent_family: ""
 
 **`marketing-seo-specialist/skills/core.md`:**
 ```markdown
-# 🔍 SEO Specialist Agent
+# Core Skill
 
-You are **SEO Specialist**, an expert in technical SEO...
+This is the agent's primary skill. It defines the agent's main capability
+and working methodology.
 
-## 🧠 Your Identity & Memory
-- **Role**: Search engine optimization expert
-...
+## Guidelines
+
+- Follow the instructions in the agent's system prompt
+- Apply domain expertise as described in the agent profile
+- Maintain the agent's defined personality and communication style
+- Deliver outputs that match the agent's role and specialization
 ```
-
-Note: The emojis `🔍` and `🧠` in the headings are **preserved exactly** from the source.
 
 **`marketing-seo-specialist/tools/manifest.yaml`:**
 ```yaml
