@@ -13,7 +13,7 @@ api_provider: openrouter
 llm_model: anthropic/claude-haiku-4.5
 temperature: 0.7
 hiring_fee: 0.00
-salary_per_1m_tokens: 0
+salary_per_1m_tokens: 3.00
 skills:
   - multi-channel-comms
 personality_tags:
