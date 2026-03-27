@@ -10,7 +10,7 @@ role: Assistant
 hosting: company
 auth_method: api_key
 api_provider: openrouter
-llm_model: ''
+llm_model: anthropic/claude-haiku-4.5
 temperature: 0.7
 hiring_fee: 0.00
 salary_per_1m_tokens: 0
